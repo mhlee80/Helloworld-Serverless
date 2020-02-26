@@ -1,0 +1,2 @@
+1. mv config/infra-cfg(sample).json config/infra-cfg.json
+2. vpc 설정에 따라 config/infra-cfg.json을 작성한다. 
