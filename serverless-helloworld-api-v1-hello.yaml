@@ -1,0 +1,9 @@
+get:
+  name: ${self:custom.apiName}-get
+  handler: src/functions/api-handlers/${self:custom.apiGroupId}/${self:custom.basePath}/get.handler
+  events:
+    - http:
+        path: /
+        method: get
+        integration: lambda-proxy
+        cors: true

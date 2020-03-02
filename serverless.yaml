@@ -38,6 +38,8 @@ custom:
   _cfg: ${file(config/infra-cfg.json)}
   cfg: ${self:custom._cfg.${self:custom.stage}}
 
+  functionsFilename: serverless-${self:custom.apiGroupId}-${self:custom.basePath}.yaml
+
   aws:
     vpc:
       region: ${self:custom.cfg.aws.vpc.region}
@@ -75,15 +77,7 @@ provider:
   role: ${self:custom.aws.iam.functionRoleARN}
 
 functions:
-  hello:
-    name: ${self:custom.apiName}-get
-    handler: src/functions/api-handlers/${self:custom.apiGroupId}/${self:custom.basePath}/get.handler
-    events:
-      - http:
-          path: /
-          method: get
-          integration: lambda-proxy
-          cors: true
+  ${file(${self:custom.functionsFilename})} 
 
 plugins:
   - serverless-offline
